@@ -1,0 +1,51 @@
+.cloud {
+    display:inline-block;
+    background:white;
+    width:120px;
+    height:120px; 
+    border-radius:50%;
+    position:relative;
+    top: 28px;
+    -webkit-filter: blur(6px);
+    z-index:99;
+    left: 100px;
+    opacity: 0.76;
+}
+.cloud:before {
+    content:"";
+    display:inline-block;
+    background:white;
+    width:100px;
+    height:100px; 
+    -webkit-filter: blur(3px);
+    position:relative;
+    border-radius:50%;
+    top:-30px;
+    left:60px;
+}
+.cloud:after {
+    content:"";
+    display:inline-block;
+    background:white;
+    width:200px;
+    height:100px; 
+    -webkit-filter: blur(3px);
+    position:relative;
+    border-radius:50%;
+    top:-80px;
+    left:70px;
+}
+
+.cloud:first-child {
+    top:-30px;
+    left: 0px;
+    opacity: 0.9;
+    zoom:1.5;
+}
+
+.cloud:last-child {
+    -webkit-filter: blur(5px);
+    opacity: 0.67;
+    z-index: 11px;
+    zoom:1.25;
+}

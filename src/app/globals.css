@@ -2,26 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  /* background: rgb(0,7,55);
+  background: linear-gradient(90deg, rgba(0,7,55,1) 0%, rgba(0,255,252,1) 50%, rgba(2,44,97,1) 100%); */
+  background: #4D7B8B;
+}
+
+/* navigation */
+.sidebar {
+  position: fixed;
+  width: 25%;
+  height: 100vh;
+  background: #B0CBE8;
+  font-size: 0.7em;
+}
+
+.nav {
+  position: relative;
+  margin: 0 15%;
+  text-align: right;
+  top: 45%;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+
+.nav ul {
+  list-style: none;
+}
+
+.nav ul li {
+  position: relative;
+  margin: 3.2em 0;
+}
+
+.nav ul li a {
+  line-height: 5em;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.4em;
+  color: rgba(#FFF, 0.35);
+  display: block;
+  transition: all ease-out 300ms;
+}
+
+.nav ul li.active a {
+  color: white;
+}
+
+.nav ul li:not(.active)::after {
+  opacity: 0.2;
+}
+
+.nav ul li:not(.active):hover a {
+  color: rgba(#FFF, 0.75);
+}
+
+.nav ul li::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 0.2em;
+  background: black;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, #B0CBE8, #4D7B8B)
+}
+
+section {
+  margin-left: 25%;
 }

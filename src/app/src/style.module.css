@@ -1,0 +1,36 @@
+.page-title {
+    font-size: 2rem;
+    text-align: center;
+    padding-top: 2rem;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+.form-control {
+    max-width: 40%;
+    min-width: 30%;
+    height: 40px;
+    border-radius: 50px;
+    padding: 4px 20px;
+}
+
+.main-info-page {
+    position: absolute;
+    top: 32vh;
+    left: 50%;
+    right: 50%;
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+}
+
+.info-text {
+    @apply text-white whitespace-nowrap mb-5;
+}
+
+.info-more-text-box {
+    @apply flex items-center;
+    margin-left: 86px;
+}

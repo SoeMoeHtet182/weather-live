@@ -1,0 +1,21 @@
+.page-center {
+    @apply w-screen h-screen flex justify-center items-center;
+}
+
+.h-container {
+    width: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    border-left: 15px solid #000;
+    border-right: 15px solid #000;
+    border-radius: 45%;
+}
+
+.h-bar {
+    position: relative;
+    width: 75px;
+    height: 15px;
+    background-color: #000; /* Change color as needed */
+}
