@@ -13,7 +13,6 @@ export default function Contact() {
                     <li><FaPhoneSquareAlt style={{display: "inline"}}/> 09-798819540</li>
                     <li><FaMapLocationDot style={{display: "inline"}}/> North Dagon, Yangon</li>
                     <li><CiMail style={{display: "inline"}}/> soemoehtet18203@gmail.com</li>
-                    {/* <li><FaGithub style={{display: "inline"}}/> soemoehtet</li> */}
                 </ul>
             </div>
         </section>

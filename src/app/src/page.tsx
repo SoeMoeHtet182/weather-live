@@ -9,6 +9,7 @@ import Rain from '@/app/ui/components/Rain/Rain';
 import { SiWindicss } from "react-icons/si";
 import { TiArrowUp, TiArrowDown, TiLocationArrowOutline } from "react-icons/ti";
 import { FiSunrise, FiSunset } from "react-icons/fi";
+import Image from 'next/image';
 
 export default function HomePage() {
     const [ city, setCity ] = useState('');
@@ -41,19 +42,6 @@ export default function HomePage() {
         }
     };
 
-    useEffect(() => {
-        if (city !== '') {
-            getWeatherDetail();
-          }
-    }, [city]);
-
-    useEffect(() => {
-        if(countryCode !== '') {
-            getCountry();
-        }
-    }, [countryCode]);
-
-
     const getCountry = async () => {
         const countryRes = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
         const countryData = await countryRes.json();
@@ -77,6 +65,19 @@ export default function HomePage() {
         setSunriseTime(convertUnixTimestampToTimeString(data.sys.sunrise));
         setSunsetTime(convertUnixTimestampToTimeString(data.sys.sunset));
     }
+
+    useEffect(() => {
+        if (city !== '') {
+            getWeatherDetail();
+        }
+    }, [city, getWeatherDetail]); // Added getWeatherDetail to the dependency array
+    
+    useEffect(() => {
+        if (countryCode !== '') {
+            getCountry();
+        }
+    }, [countryCode, getCountry]); // Added getCountry to the dependency array
+    
 
     return (
         <section className='overflow-hidden relative'>
@@ -109,7 +110,7 @@ export default function HomePage() {
                             <p className={[styles['info-text'], 'capitalize text-xl'].join(' ')}>{city}, {country}</p>
                             <div className='flex w-max'>
                                 <div className='flex me-5'>
-                                    <img src="/humidity.svg" alt="Humidity Icon" className={styles['icon']} />
+                                    <Image src="/humidity.svg" alt="Humidity Icon" className={styles['icon']} />
                                     <p className={[styles['info-text'], 'ms-3'].join(' ')}>{humidity}% <br /> Humidity</p>
                                 </div>
                                 <div className='flex ms-5'>

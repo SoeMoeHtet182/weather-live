@@ -18,7 +18,7 @@ export default function Home() {
       clearTimeout(introTimeout)
       replace('/src');
     };
-  });
+  },[replace]);
 
   return (
     <AnimatePresence>
