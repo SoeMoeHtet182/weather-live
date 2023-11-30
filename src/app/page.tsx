@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [ introShow, setIntroShow ] = useState(true);
-  const { replace } = useRouter();
 
   useEffect(() => {
+    const { replace } = useRouter();
+    
     const introTimeout = setTimeout(() => {
       setIntroShow(false);
     }, 2000);
@@ -18,7 +19,7 @@ export default function Home() {
       clearTimeout(introTimeout)
       replace('/src');
     };
-  },[replace]);
+  },[]);
 
   return (
     <AnimatePresence>
