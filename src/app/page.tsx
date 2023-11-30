@@ -12,9 +12,8 @@ export default function Home() {
   useEffect(() => {
     const introTimeout = setTimeout(() => {
       setIntroShow(false);
+      replace('/src');
     }, 2000);
-    console.log('directed');
-    replace('/src');
 
     return () => {
       clearTimeout(introTimeout);
