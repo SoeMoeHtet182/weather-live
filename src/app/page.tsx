@@ -7,10 +7,9 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [ introShow, setIntroShow ] = useState(true);
+  const { replace } = useRouter();
 
   useEffect(() => {
-    const { replace } = useRouter();
-    
     const introTimeout = setTimeout(() => {
       setIntroShow(false);
     }, 2000);
