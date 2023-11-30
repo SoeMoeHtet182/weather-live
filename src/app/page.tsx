@@ -13,10 +13,11 @@ export default function Home() {
     const introTimeout = setTimeout(() => {
       setIntroShow(false);
     }, 2000);
+    console.log('directed');
+    replace('/src');
 
     return () => {
-      clearTimeout(introTimeout)
-      replace('/src');
+      clearTimeout(introTimeout);
     };
   },[]);
 
