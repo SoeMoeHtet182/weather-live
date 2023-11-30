@@ -42,41 +42,41 @@ export default function HomePage() {
         }
     };
 
-    const getCountry = async () => {
-        const countryRes = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
-        const countryData = await countryRes.json();
-        setCountry(countryData[0]?.name?.common);
-        
-        setIsBindData(true);
-    }
-
-    const getWeatherDetail = async () => {
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ec6b5d5a0b4e9b6ccc31be756fb14ce&units=metric`);
-        const data = await res.json();
-        if(!data) return;
-        
-        setMainWeather(data.weather[0]['main']);
-        setCountryCode(data.sys.country);
-        setTemp(data.main.temp);
-        setWindSpeed(data.wind.speed);
-        setWindDirection(data.wind.deg);
-        setHumidity(data.main.humidity);
-        setWeather(data.weather[0]['description']);
-        setSunriseTime(convertUnixTimestampToTimeString(data.sys.sunrise));
-        setSunsetTime(convertUnixTimestampToTimeString(data.sys.sunset));
-    }
-
     useEffect(() => {
+        const getWeatherDetail = async () => {
+            const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ec6b5d5a0b4e9b6ccc31be756fb14ce&units=metric`);
+            const data = await res.json();
+            if(!data) return;
+            
+            setMainWeather(data.weather[0]['main']);
+            setCountryCode(data.sys.country);
+            setTemp(data.main.temp);
+            setWindSpeed(data.wind.speed);
+            setWindDirection(data.wind.deg);
+            setHumidity(data.main.humidity);
+            setWeather(data.weather[0]['description']);
+            setSunriseTime(convertUnixTimestampToTimeString(data.sys.sunrise));
+            setSunsetTime(convertUnixTimestampToTimeString(data.sys.sunset));
+        }
+
         if (city !== '') {
             getWeatherDetail();
         }
-    }, [city, getWeatherDetail]); // Added getWeatherDetail to the dependency array
+    }, [city]); // Added getWeatherDetail to the dependency array
     
     useEffect(() => {
+        const getCountry = async () => {
+            const countryRes = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
+            const countryData = await countryRes.json();
+            setCountry(countryData[0]?.name?.common);
+            
+            setIsBindData(true);
+        }
+
         if (countryCode !== '') {
             getCountry();
         }
-    }, [countryCode, getCountry]); // Added getCountry to the dependency array
+    }, [countryCode]); // Added getCountry to the dependency array
     
 
     return (
