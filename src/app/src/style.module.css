@@ -26,11 +26,32 @@
     height: 48px;
 }
 
-.info-text {
+.info-text, .weather-text {
     @apply text-white whitespace-nowrap mb-5;
 }
 
 .info-more-text-box {
     @apply flex items-center;
     margin-left: 86px;
+}
+
+.wind {
+    width: 48px;
+    height: 48px;
+}
+
+@media screen and (max-width: 600px) {
+    .icon, .wind {
+        width: 32px;
+        height: 32px
+    }
+    
+    .weather-text {
+        margin-bottom: 0;
+    }
+
+    .info-more-text-box {
+        margin-left: 0px;
+        margin-top: 10px;
+    }
 }

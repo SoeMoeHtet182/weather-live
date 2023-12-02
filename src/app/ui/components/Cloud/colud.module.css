@@ -49,3 +49,21 @@
     z-index: 11px;
     zoom:1.25;
 }
+
+@media screen and (max-width: 600px) {
+    .cloud {
+        width: 100px;
+        height: 60px;
+    }
+
+    .cloud:before {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .cloud:after {
+        width: 160px;
+        height: 60px;
+    }
+    
+}
