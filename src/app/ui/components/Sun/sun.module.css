@@ -12,3 +12,12 @@
     top: 34px;
     left: 52px;
 }
+
+@media screen and (max-width: 600px) {
+    .sun {
+        width: 80px;
+        height: 80px;
+        z-index: -10;
+        left: 20px;
+    }
+}

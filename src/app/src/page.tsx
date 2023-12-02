@@ -104,21 +104,21 @@ export default function HomePage() {
                 { isBindData && 
                     <div className={styles['main-info-page']}>
                         <div className='flex flex-col items-center'>
-                            <h1 className={[styles['info-text'], "text-6xl font-extralight", montserrat.className].join(' ')}>{temp}°C</h1>
+                            <h1 className={[styles['info-text'], "text-4xl sm:text-4xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extralight", montserrat.className].join(' ')}>{temp}°C</h1>
                             <p className={[styles['info-text'], 'capitalize'].join(' ')}>{weather}</p>
                             <p className={[styles['info-text'], 'capitalize text-xl'].join(' ')}>{city}, {country}</p>
                             <div className='flex w-max'>
-                                <div className='flex me-5'>
+                                <div className='flex me-0 sm:me-5 items-center sm:items-start'>
                                     <img src="/humidity.svg" alt="Humidity Icon" className={styles['icon']} />
-                                    <p className={[styles['info-text'], 'ms-3'].join(' ')}>{humidity}% <br /> Humidity</p>
+                                    <p className={[styles['weather-text'], 'ms-3'].join(' ')}>{humidity}% <br /> Humidity</p>
                                 </div>
-                                <div className='flex ms-5'>
-                                    <SiWindicss style={{ width: '48px', height: '48px', color: 'white' }} />
-                                    <p className={[styles['info-text'], 'ms-3'].join(' ')}>{windSpeed} m/s <br />Wind Speed</p>
+                                <div className='flex ms-3 sm:ms-5 items-center sm:items-start'>
+                                    <SiWindicss className={styles['wind']} style={{color: 'white'}}/>
+                                    <p className={[styles['weather-text'], 'ms-3'].join(' ')}>{windSpeed} m/s <br />Wind Speed</p>
                                 </div>
                             </div>
                             { showMore && 
-                                <div className="flex my-5">
+                                <div className="flex my-5 flex-col sm:flex-row">
                                     <div className='flex items-center'>
                                         <TiLocationArrowOutline style={{ width: '40px', height: '40px', color: 'white' }}/>
                                         <p className={styles['info-text']} style={{margin: 0}}>{windDirection}° <br /> Wind Direction</p>
@@ -135,11 +135,15 @@ export default function HomePage() {
                             }
                             <p
                                 onClick={() => setShowMore(!showMore)}
-                                className={[styles['info-text'], 'flex items-center mt-5 cursor-pointer'].join(' ')}
-                            >
+                                className={[
+                                    styles['info-text'],
+                                    'flex items-center',
+                                    !showMore ? 'mt-5' : 'mt-0 sm:mt-5', // Conditionally set margin classes
+                                    'cursor-pointer'
+                                ].join(' ')}
+                                >
                                 { !showMore ? 'Show More' : 'Show Less' } { !showMore ? <TiArrowDown/> : <TiArrowUp/> }
-                            </p>
-
+                                </p>
                         </div>
                     </div>
                 }
