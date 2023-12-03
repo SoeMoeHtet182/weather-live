@@ -9,9 +9,12 @@ import Rain from '@/app/ui/components/Rain/Rain';
 import { SiWindicss } from "react-icons/si";
 import { TiArrowUp, TiArrowDown, TiLocationArrowOutline } from "react-icons/ti";
 import { FiSunrise, FiSunset } from "react-icons/fi";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function HomePage() {
     const [ city, setCity ] = useState('');
+    const [ displayCity, setDisplayCity ] = useState('');
     const [ countryCode, setCountryCode ] = useState('');
     const [ country, setCountry ] = useState('');
     const [ isBindData, setIsBindData ] = useState(false);
@@ -36,7 +39,7 @@ export default function HomePage() {
 
     const handleSubmit = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            const newCity = (event.target as HTMLInputElement).value;
+            let newCity = (event.target as HTMLInputElement).value;
             setCity(newCity);
         }
     };
@@ -65,8 +68,22 @@ export default function HomePage() {
     const getWeatherDetail = async () => {
         const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ec6b5d5a0b4e9b6ccc31be756fb14ce&units=metric`);
         const data = await res.json();
-        if(!data) return;
+
+        if(!data || data.cod == '404') {
+            toast.warn('City Not Found', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: 'light',
+            });
+            return;
+        };
         
+        setDisplayCity(city);
         setMainWeather(data.weather[0]['main']);
         setCountryCode(data.sys.country);
         setTemp(data.main.temp);
@@ -83,8 +100,9 @@ export default function HomePage() {
             <div style={{ height: '19vh' }}>
                 <h1 className={[styles['page-title'], lobster.className].join(' ')}>Grab Your Clouds</h1>
             </div>
+            <ToastContainer />
             <div className='flex justify-center' style={{ height: '6vh' }}>
-                <input type="text" placeholder='Enter the name of city' className={styles['form-control']}
+                <input type="text" placeholder='Search By City' className={styles['form-control']}
                     style={{zIndex: 10}}
                     onKeyUp={handleSubmit} />
             </div>
@@ -106,7 +124,7 @@ export default function HomePage() {
                         <div className='flex flex-col items-center'>
                             <h1 className={[styles['info-text'], "text-4xl sm:text-4xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extralight", montserrat.className].join(' ')}>{temp}°C</h1>
                             <p className={[styles['info-text'], 'capitalize'].join(' ')}>{weather}</p>
-                            <p className={[styles['info-text'], 'capitalize text-xl'].join(' ')}>{city}, {country}</p>
+                            <p className={[styles['info-text'], 'capitalize text-xl'].join(' ')}>{displayCity}, {country}</p>
                             <div className='flex w-max'>
                                 <div className='flex me-0 sm:me-5 items-center sm:items-start'>
                                     <img src="/humidity.svg" alt="Humidity Icon" className={styles['icon']} />

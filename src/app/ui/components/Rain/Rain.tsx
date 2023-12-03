@@ -1,4 +1,4 @@
-import styles from './Rain.module.css';
+import styles from './rain.module.css';
 import { useEffect } from 'react';
 
 export default function Rain() {
