@@ -110,7 +110,7 @@ export default function HomePage() {
                             <p className={[styles['info-text'], 'capitalize text-xl'].join(' ')}>{city}, {country}</p>
                             <div className='flex w-max'>
                                 <div className='flex me-0 sm:me-5 items-center sm:items-start'>
-                                    <img src="/humidity.svg" alt="Humidity Icon" className={styles['icon']} />
+                                    <Image src="/humidity.svg" alt="Humidity Icon" className={styles['icon']} />
                                     <p className={[styles['weather-text'], 'ms-3'].join(' ')}>{humidity}% <br /> Humidity</p>
                                 </div>
                                 <div className='flex ms-3 sm:ms-5 items-center sm:items-start'>
