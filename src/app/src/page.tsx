@@ -9,6 +9,7 @@ import Rain from '@/app/ui/components/Rain/Rain';
 import { SiWindicss } from "react-icons/si";
 import { TiArrowUp, TiArrowDown, TiLocationArrowOutline } from "react-icons/ti";
 import { FiSunrise, FiSunset } from "react-icons/fi";
+import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -127,7 +128,7 @@ export default function HomePage() {
                             <p className={[styles['info-text'], 'capitalize text-xl'].join(' ')}>{displayCity}, {country}</p>
                             <div className='flex w-max'>
                                 <div className='flex me-0 sm:me-5 items-center sm:items-start'>
-                                    <img src="/humidity.svg" alt="Humidity Icon" className={styles['icon']} />
+                                    <Image src="/humidity.svg" alt="Humidity Icon" className={styles['icon']} />
                                     <p className={[styles['weather-text'], 'ms-3'].join(' ')}>{humidity}% <br /> Humidity</p>
                                 </div>
                                 <div className='flex ms-3 sm:ms-5 items-center sm:items-start'>
