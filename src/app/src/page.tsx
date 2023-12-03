@@ -46,55 +46,54 @@ export default function HomePage() {
     };
 
     useEffect(() => {
+        const getWeatherDetail = async () => {
+            const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ec6b5d5a0b4e9b6ccc31be756fb14ce&units=metric`);
+            const data = await res.json();
+    
+            if(!data || data.cod == '404') {
+                toast.warn('City Not Found', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    progress: undefined,
+                    theme: 'light',
+                });
+                return;
+            };
+            
+            setDisplayCity(city);
+            setMainWeather(data.weather[0]['main']);
+            setCountryCode(data.sys.country);
+            setTemp(data.main.temp);
+            setWindSpeed(data.wind.speed);
+            setWindDirection(data.wind.deg);
+            setHumidity(data.main.humidity);
+            setWeather(data.weather[0]['description']);
+            setSunriseTime(convertUnixTimestampToTimeString(data.sys.sunrise));
+            setSunsetTime(convertUnixTimestampToTimeString(data.sys.sunset));
+        }
+
         if (city !== '') {
             getWeatherDetail();
-          }
-    }, [city]);
-
+        }
+    }, [city]); // Added getWeatherDetail to the dependency array
+    
     useEffect(() => {
-        if(countryCode !== '') {
+        const getCountry = async () => {
+            const countryRes = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
+            const countryData = await countryRes.json();
+            setCountry(countryData[0]?.name?.common);
+            
+            setIsBindData(true);
+        }
+
+        if (countryCode !== '') {
             getCountry();
         }
     }, [countryCode]);
-
-
-    const getCountry = async () => {
-        const countryRes = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
-        const countryData = await countryRes.json();
-        setCountry(countryData[0]?.name?.common);
-        
-        setIsBindData(true);
-    }
-
-    const getWeatherDetail = async () => {
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ec6b5d5a0b4e9b6ccc31be756fb14ce&units=metric`);
-        const data = await res.json();
-
-        if(!data || data.cod == '404') {
-            toast.warn('City Not Found', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: false,
-                progress: undefined,
-                theme: 'light',
-            });
-            return;
-        };
-        
-        setDisplayCity(city);
-        setMainWeather(data.weather[0]['main']);
-        setCountryCode(data.sys.country);
-        setTemp(data.main.temp);
-        setWindSpeed(data.wind.speed);
-        setWindDirection(data.wind.deg);
-        setHumidity(data.main.humidity);
-        setWeather(data.weather[0]['description']);
-        setSunriseTime(convertUnixTimestampToTimeString(data.sys.sunrise));
-        setSunsetTime(convertUnixTimestampToTimeString(data.sys.sunset));
-    }
 
     return (
         <section className='overflow-hidden relative'>
